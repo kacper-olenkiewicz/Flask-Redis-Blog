@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Twoje Posty</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        body {
+            background: #f9faff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 30px auto;
+            max-width: 700px;
+            color: #333;
+        }
+        a.back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            font-weight: 600;
+            padding: 10px 22px;
+            background-color: #4b249c;
+            color: white;
+            border-radius: 40px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(75, 36, 156, 0.5);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+        }
+        a.back-link:hover {
+            background-color: #6a11cb;
+            box-shadow: 0 10px 40px rgba(106, 17, 203, 0.6);
+            transform: scale(1.05);
+        }
+        .post-item {
+            background: white;
+            padding: 22px 28px;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(75, 36, 156, 0.1);
+            margin-bottom: 28px;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .post-item:hover {
+            box-shadow: 0 20px 50px rgba(75, 36, 156, 0.22);
+            transform: translateY(-6px);
+        }
+        .post-item p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            line-height: 1.45;
+            color: #292929;
+        }
+        .post-item strong {
+            color: #4b249c;
+        }
+        hr {
+            border: none;
+            border-top: 1.5px solid #ddd;
+            margin: 20px 0 30px;
+        }
+        p.no-posts {
+            text-align: center;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #666;
+            margin-top: 60px;
+        }
+        a.edit-link {
+    display: inline-block;
+    background-color: blue;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+a.edit-link:hover {
+    background-color: darkblue;
+}
+
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('stro') }}" class="back-link">← Powrót do strony głównej</a>
+
+    {% if post %}
+        {% for p in post %}
+    <div class="post-item">
+        <p><strong>Autor:</strong> {{ p.Autor }}</p>
+        <p><strong>Tytuł:</strong> {{ p.Tytul }}</p>
+        <p><strong>Treść:</strong> {{ p.Tresc }}</p>
+        <p><strong>Data:</strong> {{ p.Data }}</p>
+        {% if p.img %}
+            <div style="margin:10px 0;">
+                <img src="{{ url_for('static', filename='uploads/' + p.img) }}"
+                     alt="Obrazek posta"
+                     style="max-width:350px; border-radius:10px; box-shadow:0 4px 12px rgba(75,36,156,0.15);">
+            </div>
+        {% endif %}
+        <p><a href="{{ url_for('edytujPost', id=p.id) }}" class="edit-link">Edytuj</a></p>
+        <p><a href="{{ url_for('uPost', id=p.id) }}" class="edit-link">Usun</a></p>
+        <p><a href="{{ url_for('zobKom', id=p.id) }}" class="edit-link">Zobacz Komentarze</a></p>
+        <p><a href="{{ url_for('kom', id=p.id) }}" class="edit-link">Dodaj komentarz</a></p>
+    </div>
+    <hr />
+{% endfor %}
+
+    {% else %}
+        <p class="no-posts">Nie masz jeszcze żadnych postów.</p>
+    {% endif %}
+</body>
+</html>

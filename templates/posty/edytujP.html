@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edycja</title>
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 600px;
+    margin: 40px auto;
+    background: #f9faff;
+    color: #333;
+    padding: 0 20px;
+}
+
+form {
+    background: white;
+    padding: 25px 28px;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(75, 36, 156, 0.1);
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    font-weight: 600;
+    color: #4b249c;
+    font-size: 1.05rem;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 11px 15px;
+    margin-top: 8px;
+    border: 1.8px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+    border-color: #6a11cb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.4);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    background: #4b249c;
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 30px;
+    box-shadow: 0 6px 20px rgba(75, 36, 156, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+}
+
+button:hover {
+    background: #6a11cb;
+    box-shadow: 0 8px 28px rgba(106, 17, 203, 0.5);
+    transform: scale(1.05);
+}
+
+p {
+    margin-top: 18px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+p a {
+    color: #4b249c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+    <label for="tytul">Tytuł:</label>
+    <input type="text" id="tytul" name="tytul"
+           value="{{ post.Tytul }}"
+           placeholder="Wpisz tytuł posta">
+
+    <label for="tresc">Treść:</label>
+    <textarea id="tresc" name="tresc" rows="5"
+              placeholder="Wpisz treść posta">{{ post.Tresc }}</textarea>
+
+    <label for="img">Zdjęcie (opcjonalnie):</label>
+    <input type="file" id="img" name="img">
+
+    {% if post.img %}
+        <div style="margin:15px 0;">
+            <strong>Obecne zdjęcie:</strong><br>
+            <img src="{{ url_for('static', filename='uploads/' + post.img) }}" alt="Obrazek posta" style="max-width:240px;">
+        </div>
+    {% endif %}
+
+    <button type="submit">Zapisz zmiany</button>
+    <p><a href="{{ url_for('stro') }}">Powrót do strony głównej</a></p>
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Witaj</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 8px 20px rgba(101, 64, 214, 0.3);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 800;
+            font-size: 2.4rem;
+            letter-spacing: 1.2px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.25);
+        }
+        header div {
+            display: flex;
+            gap: 16px;
+        }
+        header div button {
+            background: transparent;
+            border: 2.5px solid white;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(255,255,255,0.4);
+            transition: all 0.3s ease;
+        }
+        header div button:hover {
+            color: #6a11cb;
+            background: white;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.9);
+            transform: scale(1.05);
+        }
+        /* Reszta stylów bez zmian */
+        h2 {
+            color: #333;
+            border-left: 6px solid #6a11cb;
+            padding-left: 15px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            font-size: 2rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .post-item {
+            background: #fafafa;
+            padding: 20px 28px;
+            margin-bottom: 22px;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(101, 64, 214, 0.08);
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .post-item:hover {
+            box-shadow: 0 16px 48px rgba(101, 64, 214, 0.18);
+            transform: translateY(-6px);
+        }
+        .post-item p {
+            margin: 8px 0;
+            font-size: 1.1rem;
+            line-height: 1.45;
+            color: #292929;
+        }
+        .post-item strong {
+            color: #4b249c;
+        }
+        hr {
+            border: none;
+            border-top: 1.5px solid #ddd;
+            margin: 25px 0;
+        }
+        p {
+            font-size: 1.15rem;
+            color: #444;
+        }
+        /* Responsywność */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                border-radius: 0 0 20px 20px;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            header div button {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        a.kom {
+            display: inline-block;
+            background: #4b249c;
+            color: white;
+            border-radius: 22px;
+            padding: 8px 20px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(75,36,156,0.13);
+            transition: background 0.18s, transform 0.15s;
+            margin-top: 15px;
+            }
+        a.kom:hover {
+            background: #6a11cb;
+            transform: scale(1.07);
+            }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Witaj {{ naz }}</h1>
+    <div>
+        <button onclick="window.location.href='/nowyPost'">Dodaj post</button>
+        <button onclick="window.location.href='/znajomi'">Moi znajomi</button>
+        <button onclick="window.location.href='/mojePosty'">Moje Posty</button>
+        <button onclick="window.location.href='/Powiadomienia'">!</button>
+        <button onclick="window.location.href='/wyloguj'">Wyloguj</button>
+    </div>
+</header>
+
+<h2>Wszystkie Posty</h2>
+<hr>
+{% if not posty %}
+    <p>Nie ma jeszcze żadnych postów</p>
+{% else %}
+    {% for p in posty %}
+    <div class="post-item">
+        <p><strong>Autor:</strong> {{ p.Autor }}</p>
+        <p><strong>Tytuł:</strong> {{ p.Tytul }}</p>
+        <p><strong>Treść:</strong> {{ p.Tresc }}</p>
+        <p><strong>Data:</strong> {{ p.Data }}</p>
+
+        {% if p.img %}
+            <div style="margin: 15px 0;">
+                <img src="{{ url_for('static', filename='uploads/' + p.img) }}"
+                     alt="Obrazek posta"
+                     style="max-width: 350px; border-radius: 12px; box-shadow: 0 6px 20px rgba(75,36,156,0.15);">
+            </div>
+        {% endif %}
+    </div>
+    <p><a class="kom" href="{{ url_for('kom', id=p.id) }}">Dodaj komentarz</a></p>
+    <p><a class="kom" href="{{ url_for('zobKom', id=p.id) }}">Zobacz Komentarze</a></p>
+    <hr>
+{% endfor %}
+
+{% endif %}
+</body>
+</html>

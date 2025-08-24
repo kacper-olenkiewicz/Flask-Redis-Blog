@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9faff;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(101, 64, 214, 0.3);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 2.6rem;
+    letter-spacing: 1.2px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.25);
+}
+
+
+.hero {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #4b249c;
+    margin-bottom: 14px;
+}
+
+.hero p {
+    font-size: 1.18rem;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+.cta-buttons a {
+    background-color: #4b249c;
+    color: white;
+    padding: 12px 28px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 28px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(75,36,156,0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+}
+
+.cta-buttons a:hover {
+    background-color: #6a11cb;
+    box-shadow: 0 8px 28px rgba(106,17,203,0.5);
+    transform: scale(1.05);
+}
+
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 50px auto 60px;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: white;
+    flex: 1 1 260px;
+    border-radius: 16px;
+    padding: 28px 22px;
+    box-shadow: 0 8px 34px rgba(75,36,156,0.12);
+    text-align: center;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.feature-card:hover {
+    box-shadow: 0 18px 58px rgba(75,36,156,0.26);
+    transform: translateY(-6px);
+}
+
+.feature-card i {
+    font-size: 42px;
+    color: #6a11cb;
+    margin-bottom: 18px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #4b249c;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    line-height: 1.45;
+    color: #555;
+}
+
+
+.example-posts {
+    max-width: 720px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.example-posts h3 {
+    font-weight: 700;
+    font-size: 1.9rem;
+    color: #4b249c;
+    margin-bottom: 28px;
+}
+
+.example-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.example-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 26px;
+    box-shadow: 0 8px 28px rgba(75,36,156,0.12);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.example-card:hover {
+    box-shadow: 0 18px 58px rgba(75,36,156,0.26);
+    transform: translateY(-6px);
+}
+
+.example-card b {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #4b249c;
+}
+
+.example-card p {
+    margin: 8px 0 0;
+    color: #414141;
+    font-size: 1.05rem;
+    font-style: italic;
+}
+
+@media (max-width: 720px) {
+    .features {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .feature-card {
+        flex: none;
+        width: 100%;
+    }
+
+    .example-cards {
+        gap: 18px;
+    }
+}
+
+    </style>
+</head>
+<body>
+<header>
+    <h1>Blog</h1>
+   
+</header>
+
+<div class="hero">
+    <h2>Otwórz się na świat!</h2>
+    <p>Szukasz miejsca, gdzie możesz <strong>dzielić się swoimi przemyśleniami</strong>, poznawać innych i inspirować się wpisami społeczności? <br>
+    Ten blog to przestrzeń stworzona właśnie dla Ciebie.</p>
+    <div class="cta-buttons">
+        <a href="{{ url_for('reje') }}">Załóż konto</a>
+        <a href="{{ url_for('logowanie') }}">Zaloguj się</a>
+    </div>
+</div>
+
+<section class="features">
+    <div class="feature-card">
+        <i class="fas fa-pen-nib"></i>
+        <h3>Dodawaj posty</h3>
+        <p>Dziel się swoimi myślami, poradami lub ciekawostkami! Pisanie postów jest szybkie i proste.</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-users"></i>
+        <h3>Buduj sieć znajomych</h3>
+        <p>Wyszukuj i dodawaj ludzi, z którymi łączy Cię wspólna pasja.</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-star"></i>
+        <h3>Poznaj innych</h3>
+        <p>Przeglądaj wpisy społeczności, poznaj inspirujących autorów i ich historie.</p>
+    </div>
+</section>
+
+<section class="example-posts">
+    <h3>Przykładowe posty z naszej społeczności</h3>
+    <div class="example-cards">
+        <div class="example-card">
+            <b>Jak efektywnie się uczyć?</b>
+            <p><i>Autor: Ola_95</i></p>
+            <p>Podzielę się swoimi metodami nauki, które pomagają mi zapamiętywać szybciej...</p>
+        </div>
+        <div class="example-card">
+            <b>Moje ulubione książki z 2023 roku</b>
+            <p><i>Autor: TomekCzyta</i></p>
+            <p>Kilka pozycji, które polecam każdemu miłośnikowi literatury...</p>
+        </div>
+        <div class="example-card">
+            <b>Przepis na szybkie śniadanie</b>
+            <p><i>Autor: FoodieAnka</i></p>
+            <p>Oto jak w 5 minut przygotować zdrowy i pyszny początek dnia!</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

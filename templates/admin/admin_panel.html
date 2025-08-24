@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Panel Admina</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+            background: #f9fafc;
+            color: #2c3e50;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #5a3ea1;
+            background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+            border-radius: 12px;
+            color: white;
+            box-shadow: 0 8px 28px rgba(106, 17, 203, 0.4);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+        }
+        header button {
+            background-color: transparent;
+            border: 2.5px solid white;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        header button:hover {
+            background-color: white;
+            color: #6a11cb;
+            box-shadow: 0 6px 20px rgba(106, 17, 203, 0.9);
+            transform: scale(1.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 10px 32px rgba(106, 17, 203, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+        thead {
+            background: #6a11cb;
+            color: white;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+        th, td {
+            padding: 14px 20px;
+            border-bottom: 1.5px solid #e1dafb;
+            text-align: left;
+            vertical-align: middle;
+        }
+        tbody tr:hover {
+            background-color: #f4f1ff;
+            transform: scale(1.01);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        a {
+            color: #6a11cb;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 2px solid #6a11cb;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a:hover {
+            background-color: #6a11cb;
+            color: white;
+            box-shadow: 0 8px 24px rgba(106, 17, 203, 0.7);
+            transform: scale(1.05);
+        }
+        td:first-child {
+            font-weight: 700;
+            color: #412275;
+            width: 5%;
+        }
+        td:last-child {
+            width: 12%;
+        }
+        @media (max-width: 720px) {
+            thead {
+                display: none;
+            }
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
+            }
+            tr {
+                margin-bottom: 18px;
+                box-shadow: 0 6px 24px rgba(106, 17, 203, 0.12);
+                border-radius: 14px;
+                padding: 18px 20px;
+                background: white;
+            }
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #ddd;
+                font-size: 0.95rem;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 18px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-weight: 600;
+                color: #6a11cb;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            td:last-child {
+                padding-top: 12px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Panel Admina</h1>
+    <button onclick="window.location.href='/wyloguj'">Wyloguj</button>
+</header>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Autor</th>
+            <th>Tytuł</th>
+            <th>Treść</th>
+            <th>Data</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for post in posty %}
+        <tr>
+            <td data-label="ID">{{ post.id }}</td>
+            <td data-label="Autor">{{ post.Autor }}</td>
+            <td data-label="Tytuł">{{ post.Tytul }}</td>
+            <td data-label="Treść">{{ post.Tresc }}</td>
+            <td data-label="Data">{{ post.Data }}</td>
+            <td data-label="Akcje"><a href="{{ url_for('usun_post', post_id=post.id, naz=post.Autor) }}">Usuń</a></td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" style="text-align:center; padding:20px; font-weight:600; color:#777">Brak postów do wyświetlenia.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

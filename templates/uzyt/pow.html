@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Powiadomienia</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #f9faff;
+            color: #333;
+        }
+        h1 {
+            color: #4b249c;
+        }
+        .notification-list {
+            list-style: none;
+            padding: 0;
+        }
+        .notification-list li {
+            background: #e9e7ff;
+            border-radius: 8px;
+            padding: 14px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(75, 36, 156, 0.15);
+            color: #2b215a;
+            font-weight: 600;
+        }
+        .no-notifications {
+            font-style: italic;
+            color: #666;
+            margin-top: 40px;
+        }
+        a.back-link {
+            display: inline-block;
+            margin-top: 28px;
+            background: #4b249c;
+            color: white;
+            padding: 8px 26px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 16px rgba(75, 36, 156, 0.3);
+            transition: background 0.2s ease;
+        }
+        a.back-link:hover {
+            background: #6a11cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Twoje powiadomienia</h1>
+
+    {% if pow %}
+        <ul class="notification-list">
+            {% for p in pow %}
+                <li>{{ p }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-notifications">Brak nowych powiadomień.</p>
+    {% endif %}
+
+    <a href="{{ url_for('stro') }}" class="back-link">← Powrót do strony głównej</a>
+</body>
+</html>

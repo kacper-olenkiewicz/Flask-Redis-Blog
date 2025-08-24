@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post i komentarze</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9faff;
+            margin: 40px auto;
+            max-width: 650px;
+            color: #333;
+        }
+        .post-box {
+            padding: 22px 28px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 8px 30px rgba(75,36,156,0.13);
+            margin-bottom: 32px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #4b249c;
+        }
+        .comment-box {
+            background: #f2f2fc;
+            border-radius: 8px;
+            padding: 16px 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(75,36,156,0.05);
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #4b249c;
+        }
+        .comment-date {
+            color: #888;
+            font-size: 0.92em;
+            margin-bottom: 8px;
+        }
+        h3 {
+            margin-top: 32px;
+            color: #4b249c;
+        }
+        a {
+            color: #4b249c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="post-box">
+        <h2>{{ post.Tytul }}</h2>
+        <p><strong>Autor:</strong> {{ post.Autor }}</p>
+        <p><strong>Treść:</strong> {{ post.Tresc }}</p>
+        <p><strong>Data:</strong> {{ post.Data }}</p>
+        {% if post.img %}
+            <img src="{{ url_for('static', filename='uploads/' + post.img) }}" alt="Obrazek posta" style="max-width: 340px; margin-bottom:10px;">
+        {% endif %}
+    </div>
+    <h3>Komentarze:</h3>
+    {% if comments %}
+        {% for c in comments %}
+            <div class="comment-box">
+                <div class="comment-author">{{ c.author }}</div>
+                <div class="comment-date">{{ c.data }}</div>
+                <div>{{ c.text }}</div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Brak komentarzy dla tego posta.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('stro') }}">← Powrót do strony głównej</a></p>
+</body>
+</html>

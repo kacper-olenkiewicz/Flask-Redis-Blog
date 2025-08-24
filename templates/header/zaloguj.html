@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Zaloguj się</title>
+   
+    <style>
+        
+
+        body {
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: #333;
+        }
+        form {
+            background-color: white;
+            padding: 40px 35px;
+            border-radius: 15px;
+            box-shadow: 0 11px 27px rgba(0,0,0,0.15);
+            width: 350px;
+            box-sizing: border-box;
+            animation: fadeInForm 0.8s ease forwards;
+        }
+        @keyframes fadeInForm {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #4a4a4a;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 11px 14px;
+            margin-bottom: 22px;
+            border: 2px solid #dcdcdc;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.25s ease;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #8e44ad;
+            outline: none;
+            box-shadow: 0 0 8px rgba(142, 68, 173, 0.35);
+        }
+        button {
+            display: block;
+            width: 100%;
+            background: #8e44ad;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        button:hover {
+            background: #732d91;
+            box-shadow: 0 8px 26px rgba(115, 45, 145, 0.65);
+        }
+        .error-message {
+            background-color: #f8d7da;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            color: #842029;
+            font-weight: 600;
+            border: 1px solid #f5c2c7;
+            text-align: center;
+            box-sizing: border-box;
+            animation: pulseError 1.2s infinite;
+        }
+        @keyframes pulseError {
+            0%, 100% {
+                background-color: #f8d7da;
+            }
+            50% {
+                background-color: #f5acb1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form method="post" novalidate>
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        <label for="user">Nazwa użytkownika:</label>
+        <input type="text" id="user" name="user" placeholder="Wpisz nazwę użytkownika" required />
+
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" placeholder="Wpisz hasło" required />
+
+        <button type="submit">Zaloguj</button>
+    </form>
+</body>
+</html>

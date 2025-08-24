@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Komentarze do posta</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9faff;
+            margin: 40px auto;
+            max-width: 650px;
+            color: #333;
+        }
+        .post-box {
+            padding: 22px 28px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 8px 30px rgba(75,36,156,0.13);
+            margin-bottom: 32px;
+        }
+        .comment-box {
+            background: #f2f2fc;
+            border-radius: 8px;
+            padding: 16px 22px;
+            margin-bottom: 20px;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: #4b249c;
+        }
+        .comment-date {
+            color: #888;
+            font-size: 0.92em;
+        }
+        form {
+            margin-bottom: 34px;
+        }
+        textarea {
+            width: 100%;
+            height: 70px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 1em;
+            resize: vertical;
+        }
+        button {
+            background: #4b249c;
+            color: white;
+            font-weight: 600;
+            padding: 9px 24px;
+            border-radius: 24px;
+            border: none;
+            cursor: pointer;
+            margin-top: 12px;
+            box-shadow: 0 3px 12px rgba(75,36,156,0.23);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            background: #6a11cb;
+            box-shadow: 0 7px 18px rgba(106,17,203,0.17);
+        }
+        a {
+            color: #4b249c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="post-box">
+        <h2>{{ post.Tytul }}</h2>
+        <p><strong>Autor:</strong> {{ post.Autor }}</p>
+        <p><strong>Treść:</strong> {{ post.Tresc }}</p>
+        <p><strong>Data:</strong> {{ post.Data }}</p>
+        {% if post.img %}
+            <img src="{{ url_for('static', filename='uploads/' + post.img) }}" alt="Obrazek posta" style="max-width: 340px; margin-bottom:10px;">
+        {% endif %}
+    </div>
+    <form method="post">
+        <label for="kom">Dodaj komentarz:</label>
+        <textarea name="kom" id="kom" placeholder="Wpisz treść komentarza..." required></textarea>
+        <br />
+        <button type="submit">Dodaj komentarz</button>
+    </form>
+    <p><a href="{{ url_for('stro') }}">← Powrót do strony głównej</a></p>
+
+</body>
+</html>

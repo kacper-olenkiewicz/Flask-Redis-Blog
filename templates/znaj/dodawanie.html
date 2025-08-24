@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Dodaj użytkownika</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        /* Spójny, atrakcyjny styl formularza dodawania użytkownika */
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            color: #333;
+        }
+        form {
+            background-color: white;
+            padding: 40px 35px;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(101, 64, 214, 0.15);
+            width: 380px;
+            box-sizing: border-box;
+            animation: fadeInForm 0.8s ease forwards;
+            text-align: center;
+        }
+        @keyframes fadeInForm {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #4b249c;
+            text-align: left;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 25px;
+            border: 2px solid #dcdcdc;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 10px rgba(106, 17, 203, 0.5);
+        }
+        button {
+            width: 100%;
+            padding: 14px 0;
+            background: #6a11cb;
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            box-shadow: 0 6px 25px rgba(106, 17, 203, 0.5);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        button:hover {
+            background: #4e0da8;
+            box-shadow: 0 9px 28px rgba(78, 13, 168, 0.7);
+        }
+        p {
+            font-size: 1rem;
+            margin-top: 20px;
+            color: #6a11cb;
+            font-weight: 600;
+        }
+        a {
+            color: #6a11cb;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #8e44ad;
+            text-decoration: underline;
+        }
+        .error-message {
+            background-color: #fddede;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            color: #b02a37;
+            font-weight: 700;
+            border: 1.5px solid #e1989a;
+            text-align: center;
+            box-sizing: border-box;
+            animation: pulseError 1.2s infinite;
+        }
+        @keyframes pulseError {
+            0%, 100% { background-color: #fddede; }
+            50% { background-color: #fcb0b3; }
+        }
+        .success-message {
+            background-color: #defde0;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            color: #2d8a36;
+            font-weight: 700;
+            border: 1.5px solid #a3d9a5;
+            text-align: center;
+            box-sizing: border-box;
+            animation: pulseSuccess 1.5s infinite;
+        }
+        @keyframes pulseSuccess {
+            0%, 100% { background-color: #defde0; }
+            50% { background-color: #b5f1b1; }
+        }
+    </style>
+</head>
+<body>
+    <form method="post" novalidate>
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+        {% if dodano %}
+            <p class="success-message">{{ dodano }}</p>
+        {% endif %}
+        <label for="user">Nazwa użytkownika:</label>
+        <input type="text" id="user" name="user" placeholder="Wpisz nazwę użytkownika" required />
+
+        <button type="submit">Dodaj</button>
+        <p><a href="{{ url_for('stro') }}">Powrót do strony głównej</a></p>
+    </form>
+</body>
+</html>

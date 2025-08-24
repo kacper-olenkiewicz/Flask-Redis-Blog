@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Czat</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #f5f7ff;
+            padding: 0 18px 40px;
+        }
+        h2 {
+            color: #6a11cb;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        a {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #6a11cb;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 2px solid #6a11cb;
+            transition: background .3s, color .3s;
+        }
+        a:hover {
+            background: #6a11cb;
+            color: #fff;
+        }
+        .chat-messages {
+            background: #fff;
+            border-radius: 17px;
+            box-shadow: 0 6px 22px rgba(106, 17, 203, 0.09);
+            padding: 16px 15px 8px 15px;
+            margin-bottom: 18px;
+            max-height: 410px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .msg {
+            background: #e4e7ff;
+            color: #4b249c;
+            border-radius: 16px 16px 16px 4px;
+            padding: 12px 15px 7px 10px;
+            font-size: 1rem;
+            width: fit-content;
+            max-width: 85%;
+            box-shadow: 0 2px 8px rgba(106, 17, 203, 0.06);
+            position: relative;
+            align-self: flex-start;
+        }
+        .msg strong { font-weight: 700;}
+        .msg .time {
+            color: #6a11cb;
+            font-size: .78em;
+            margin-left: 11px;
+            opacity: 0.7;
+        }
+        .from-me {
+            align-self: flex-end;
+            background: #6a11cb;
+            color: #fff;
+            border-radius: 16px 16px 4px 16px;
+        }
+        .from-me strong { color: #fff; }
+        .from-me .time { color: #d3bdfa; }
+        form {
+            display: flex;
+            gap: 10px;
+            justify-content: stretch;
+        }
+        input[type="text"] {
+            flex: 1;
+            border-radius: 30px;
+            padding: 13px 18px;
+            border: 2px solid #6a11cb;
+            font-size: 1rem;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #4b249c;
+            box-shadow: 0 0 6px rgba(75,36,156,0.18);
+        }
+        button {
+            background: #6a11cb;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 28px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 1rem;
+            box-shadow: 0 4px 14px rgba(106,17,203,0.22);
+            transition: background .2s, box-shadow .2s;
+        }
+        button:hover { background: #4b249c; box-shadow: 0 6px 28px rgba(75,36,156, 0.21);}
+        p[style*="color:red"] {text-align:center; font-weight:700; margin-bottom:10px;}
+    </style>
+</head>
+<body>
+    <h2>Czat z {{ odbiorca }}</h2>
+    <p><a href="{{ url_for('stro') }}">Powrót do strony głównej</a></p>
+    {% if error %}
+      <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <div class="chat-messages">
+      {% for msg in wiadomosci %}
+        <div class="msg {% if msg.od == session['username'] %}from-me{% endif %}">
+          <strong>{{ msg.od }}</strong>: {{ msg.text }}
+          <span class="time">{{ msg.czas }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <form method="post" autocomplete="off">
+      <input type="text" name="wiad" placeholder="Napisz wiadomość…" required />
+      <button type="submit">Wyślij</button>
+    </form>
+</body>
+</html>

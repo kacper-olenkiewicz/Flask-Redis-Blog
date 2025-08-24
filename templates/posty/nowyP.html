@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Post</title>
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9faff;
+    max-width: 600px;
+    margin: 40px auto;
+    color: #333;
+    padding: 0 20px;
+}
+
+form {
+    background: white;
+    padding: 25px 28px;
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(75, 36, 156, 0.1);
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 12px 0 22px 0;
+    border: 1.8px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+    border-color: #6a11cb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.4);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    background: #4b249c;
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    box-shadow: 0 6px 20px rgba(75, 36, 156, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+}
+
+button:hover {
+    background: #6a11cb;
+    box-shadow: 0 8px 28px rgba(106, 17, 203, 0.5);
+    transform: scale(1.05);
+}
+
+p {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+p a {
+    color: #4b249c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+    Tytuł: <input type="text" name="tytul"><br>
+    Treść: <textarea name="tresc"></textarea><br>
+    Zdjęcie: <input type="file" name="img"><br>
+    <button type="submit">Dodaj</button>
+    <p><a href="{{ url_for('stro') }}">Powrót do strony głównej</a></p>  
+</form>
+
+</body>
+</html>

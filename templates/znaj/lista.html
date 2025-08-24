@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <title>Twoi znajomi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+        body {
+            background: #f0f4ff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 30px auto;
+            max-width: 600px;
+            color: #333;
+        }
+        header h2 {
+            font-weight: 700;
+            color: #3a4dbf;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 6px rgba(58, 77, 191, 0.25);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        ul li {
+            background: white;
+            margin-bottom: 12px;
+            padding: 14px 20px;
+            border-radius: 14px;
+            box-shadow: 0 3px 15px rgba(58, 77, 191, 0.1);
+            font-weight: 600;
+            font-size: 1.15rem;
+            transition: box-shadow 0.3s ease, transform 0.15s ease;
+            cursor: default;
+        }
+        ul li:hover {
+            box-shadow: 0 9px 27px rgba(58, 77, 191, 0.22);
+            transform: translateY(-3px);
+            background: #e3eaff;
+        }
+        p.empty {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        a {
+            color: #3a4dbf;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 2.5px solid #3a4dbf;
+            padding: 10px 24px;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        a:hover {
+            background-color: #3a4dbf;
+            color: white;
+            box-shadow: 0 8px 24px rgba(58, 77, 191, 0.4);
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Twoi znajomi</h2>
+    </header>
+
+    {% if znajomi %}
+        <ul>
+            {% for znajomy in znajomi %}
+                <li>{{ znajomy }}</li>
+                <a href="{{ url_for('usun_znaj', znaj=znajomy) }}">Usuń znajomego</a>
+                <a href="{{ url_for('wiadomosc', znaj=znajomy) }}">Wyslij wiadomosc</a>  
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty">Nie masz jeszcze żadnych znajomych.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('dodajZnaj') }}">Dodaj nowego znajomego</a></p>
+    <p><a href="{{ url_for('stro') }}">Powrót do strony głównej</a></p>
+</body>
+</html>
